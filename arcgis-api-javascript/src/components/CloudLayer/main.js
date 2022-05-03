@@ -1,7 +1,7 @@
 import Map from "@arcgis/core/Map";
 import SceneView from "@arcgis/core/views/SceneView";
 import PointCloudLayer from "@arcgis/core/layers/PointCloudLayer";
-import colorRendererCreator from "@arcgis/core/smartMapping/renderers/color";
+import * as colorRendererCreator from "@arcgis/core/smartMapping/renderers/color";
 import typeRendererCreator from "@arcgis/core/smartMapping/renderers/type";
 import Legend from "@arcgis/core/widgets/Legend";
 import promiseUtils from "@arcgis/core/core/promiseUtils";
