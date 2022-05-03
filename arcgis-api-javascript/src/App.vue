@@ -1,15 +1,14 @@
 <template>
   <div>
-    <ComA />
+    <CloudLayer />
   </div>
 </template>
 
 <script>
-import ComA from "./components/CompA";
-
+import CloudLayer from "./components/CloudLayer";
 export default {
-  name: "App",
-  components: { ComA },
+  name: "pointCloudLayer",
+  components: { CloudLayer },
   created() {},
   mounted() {},
   methods: {},
