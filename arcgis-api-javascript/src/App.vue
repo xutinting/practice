@@ -1,14 +1,14 @@
 <template>
   <div>
-    <CloudLayer />
+    <FlowerRenderer />
   </div>
 </template>
 
 <script>
-import CloudLayer from "./components/CloudLayer";
+import FlowerRenderer from "./components/FlowerRenderer";
 export default {
-  name: "pointCloudLayer",
-  components: { CloudLayer },
+  name: "Flower_renderer",
+  components: { FlowerRenderer },
   created() {},
   mounted() {},
   methods: {},
