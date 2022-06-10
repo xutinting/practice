@@ -13,7 +13,7 @@ export function init() {
     // serves as a basemap layer
     const spilhausBasemap = new TileLayer({
         url: "https://tiles.arcgis.com/tiles/nGt4QxSblgDfeJn9/arcgis/rest/services/Spilhaus_Vibrant_Basemap/MapServer",
-        effect: "saturate(10%) brightness(0.3)" // dim brightness to create darker style basemap
+        effect: "saturate(50%) brightness(0.8)" // dim brightness to create darker style basemap
     });
 
     const colorRamp = new MultipartColorRamp({

@@ -1,14 +1,14 @@
 <template>
   <div>
-    <FlowerRenderer />
+    <PointClustering />
   </div>
 </template>
 
 <script>
-import FlowerRenderer from "./components/FlowerRenderer";
+import PointClustering from "./components/PointClustering";
 export default {
-  name: "Flower_renderer",
-  components: { FlowerRenderer },
+  name: "Point_clustering",
+  components: { PointClustering },
   created() {},
   mounted() {},
   methods: {},
