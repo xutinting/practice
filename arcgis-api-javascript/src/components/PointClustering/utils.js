@@ -10,10 +10,6 @@ export function init() {
     // popupTemplate displaying the predominant
     // fuel type of the power plants in the cluster
 
-    // Configure clustering on the layer with a
-    // popupTemplate displaying the predominant
-    // fuel type of the power plants in the cluster
-
     const clusterLabelThreshold = 1500;
 
     const haloColor = "#373837";
@@ -184,17 +180,17 @@ export function init() {
             labelPlacement: "center-center",
             labelExpressionInfo: {
                 expression: `
-          var value = $feature.cluster_avg_capacity_mw;
-          var num = Count(Text(Round(value)));
+        var value = $feature.cluster_avg_capacity_mw;
+        var num = Count(Text(Round(value)));
 
-          Decode(num,
+        Decode(num,
             4, Text(value / Pow(10, 3), "##.0k"),
             5, Text(value / Pow(10, 3), "##k"),
             6, Text(value / Pow(10, 3), "##k"),
             7, Text(value / Pow(10, 6), "##.0m"),
             Text(value, "#,###")
-          );
-          `
+        );
+        `
             },
             where: `cluster_avg_capacity_mw <= ${clusterLabelThreshold}`
         }]
@@ -261,17 +257,17 @@ export function init() {
             labelPlacement: "center-center",
             labelExpressionInfo: {
                 expression: `
-          var value = $feature.capacity_mw;
-          var num = Count(Text(Round(value)));
+        var value = $feature.capacity_mw;
+        var num = Count(Text(Round(value)));
 
-          Decode(num,
+        Decode(num,
             4, Text(value / Pow(10, 3), "##.0k"),
             5, Text(value / Pow(10, 3), "##k"),
             6, Text(value / Pow(10, 3), "##k"),
             7, Text(value / Pow(10, 6), "##.0m"),
             Text(value, "#,###")
-          );
-          `
+        );
+        `
             },
             where: `capacity_mw > ${clusterLabelThreshold}`
         }, {
@@ -326,17 +322,17 @@ export function init() {
             labelPlacement: "center-center",
             labelExpressionInfo: {
                 expression: `
-          var value = $feature.capacity_mw;
-          var num = Count(Text(Round(value)));
+        var value = $feature.capacity_mw;
+        var num = Count(Text(Round(value)));
 
-          Decode(num,
+        Decode(num,
             4, Text(value / Pow(10, 3), "##.0k"),
             5, Text(value / Pow(10, 3), "##k"),
             6, Text(value / Pow(10, 3), "##k"),
             7, Text(value / Pow(10, 6), "##.0m"),
             Text(value, "#,###")
-          );
-          `
+        );
+        `
             },
             where: `capacity_mw <= ${clusterLabelThreshold}`
         }]
