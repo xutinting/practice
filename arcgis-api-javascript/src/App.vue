@@ -1,14 +1,14 @@
 <template>
   <div>
-    <PointClustering />
+    <Map />
   </div>
 </template>
 
 <script>
-import PointClustering from "./components/PointClustering";
+import Map from "./components/Map";
 export default {
-  name: "Point_clustering",
-  components: { PointClustering },
+  name: "Json_map",
+  components: { Map },
   created() {},
   mounted() {},
   methods: {},
