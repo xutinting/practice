@@ -11,14 +11,9 @@
 
 <script>
 /* eslint-disable */
-import { init, createGraphic } from "./utils";
+import { init, createPolygonGeometry, insertCity2Map } from "./utils";
 import cityList from "@/config/cities.json";
 import { getCityJson } from "@/api/index.js";
-
-let map = null;
-let view = null;
-let layer = null;
-let collection = null;
 
 export default {
   name: "Json_map",
@@ -28,21 +23,14 @@ export default {
     };
   },
   mounted() {
-    ({ map, view, layer, collection } = init());
+    init();
   },
   methods: {
     onclick(city) {
-      getCityJson(city).then((data) => {
-        for (const feat of data.features) {
-          const graphics = feat.geometry.coordinates.map((coords) =>
-            createGraphic(coords)
-          );
-
-          graphics.forEach((graphic) => {
-            collection.add(graphic);
-          });
-        }
-      });
+      // getCityJson(city).then((data) => {
+      //   createPolygonGeometry(data);
+      // });
+      insertCity2Map(city);
     },
   },
 };
