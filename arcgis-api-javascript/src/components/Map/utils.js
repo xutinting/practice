@@ -9,6 +9,7 @@ import { getCityJson } from '@/api/index.js';
 let map;
 let view;
 
+// 初始化地图
 export function init() {
   map = new Map({
     basemap: 'topo-vector',
@@ -16,8 +17,8 @@ export function init() {
 
   view = new MapView({
     container: 'viewDiv',
-    center: [131, 45],
-    zoom: 10,
+    center: [95, 35],
+    zoom: 4.5,
     map: map,
   });
 }
@@ -83,6 +84,9 @@ export function insertCity2Map(city) {
       });
     });
     map.add(graphicsLayer);
-    view.goTo(graphicsLayer.graphics);
+    const opts  = {
+      duration:1500
+    };
+    view.goTo(graphicsLayer.graphics,opts);
   });
 }
