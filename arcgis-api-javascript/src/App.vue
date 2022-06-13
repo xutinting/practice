@@ -1,14 +1,14 @@
 <template>
   <div>
-    <VectorTileLayer/>
+    <Data/>
   </div>
 </template>
 
 <script>
-import VectorTileLayer from "./components/MapScenes/VectorTileLayer";
+import Data from "./components/MapScenes/Data";
 export default {
-  name: "add-vectorTileLayer",
-  components: { VectorTileLayer },
+  name: "Query-Layer",
+  components: { Data },
   created() {},
   mounted() {},
   methods: {},

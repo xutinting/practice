@@ -1,16 +1,17 @@
 <template>
   <div id="viewDiv"></div>
-  <div id="scalebar"></div>
+  <!-- <div id="scalebar"></div> -->
 </template>
 
 <script>
 /* eslint-disable */
-import { InitializeMap, displayWebMap } from "./utils";
+import { InitializeMap, displayWebMap,displayWebScene } from "./utils";
 export default {
   name: "add-vectorTileLayer",
   mounted() {
     // InitializeMap();
-    displayWebMap();
+    // displayWebMap();
+    displayWebScene();
   },
   methods: {},
 };
@@ -25,9 +26,9 @@ body,
   height: 100vh;
 }
 
-#scalebar {
+/* #scalebar {
   position: absolute;
   left: 5px;
   bottom: 65px;
-}
+} */
 </style>

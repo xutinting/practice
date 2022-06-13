@@ -7,6 +7,8 @@ import MapView from "@arcgis/core/views/MapView";
 import WebMap from "@arcgis/core/WebMap";
 import ScaleBar from "@arcgis/core/widgets/ScaleBar";
 import Legend from "@arcgis/core/widgets/Legend";
+import WebScene from "@arcgis/core/WebScene";
+import SceneView from "@arcgis/core/views/SceneView";
 
 let map;
 let view;
@@ -62,4 +64,37 @@ export function displayWebMap() {
         view: view
     });
     view.ui.add(legend, "top-right");
+}
+
+export function displayWebScene() {
+    esriConfig.apiKey = "AAPK1c8f781f29174fc0880cce848cf5a7e6qhXfShWA74tQHbzvL-KwujiR0Os5ik68ET-taRuJFgeKadcLfDeQqxZQW9TXlxGW";
+
+    map = new Map({
+        basemap: "arcgis-topographic"
+    });
+
+    const view = new MapView({
+        map: map,
+        center: [-118.805, 34.027], // Longitude, latitude
+        zoom: 13, // Zoom level
+        container: "viewDiv" // Div element
+    });
+
+    const webscene = new WebScene({
+        portalItem: {
+            id: "579f97b2f3b94d4a8e48a5f140a6639b"
+        }
+    });
+
+    view = new SceneView({
+        container: "viewDiv",
+        map: webscene
+    });
+
+    const legend = new Legend({
+        view: view
+    });
+
+    view.ui.add(legend, "top-right");
+
 }
