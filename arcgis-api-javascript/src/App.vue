@@ -1,14 +1,14 @@
 <template>
   <div>
-    <Map/>
+    <VectorTileLayer/>
   </div>
 </template>
 
 <script>
-import Map from "./components/Map";
+import VectorTileLayer from "./components/MapScenes/VectorTileLayer";
 export default {
-  name: "Json_map",
-  components: { Map },
+  name: "add-vectorTileLayer",
+  components: { VectorTileLayer },
   created() {},
   mounted() {},
   methods: {},
