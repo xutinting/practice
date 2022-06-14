@@ -4,12 +4,12 @@
 
 <script>
 /* eslint-disable */
-import { InitializeMap, editFeatureData } from "./utils";
+import { InitializeMap,findPlace } from "./utils";
 export default {
-  name: "Query-Layer",
+  name: "Search-Layer",
   mounted() {
     InitializeMap();
-    editFeatureData();
+    findPlace();
 
   },
   methods: {},

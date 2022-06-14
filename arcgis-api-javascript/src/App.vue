@@ -1,14 +1,14 @@
 <template>
   <div>
-    <Data/>
+    <Search/>
   </div>
 </template>
 
 <script>
-import Data from "./components/MapScenes/Data";
+import Search from "./components/Search";
 export default {
-  name: "Query-Layer",
-  components: { Data },
+  name: "Search-Layer",
+  components: { Search },
   created() {},
   mounted() {},
   methods: {},
