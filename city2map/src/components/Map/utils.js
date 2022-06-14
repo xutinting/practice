@@ -23,37 +23,6 @@ export function init() {
     });
 }
 
-export function createPolygonGeometry(data) {
-    if (data.features.length) {
-        // 遍历data中的所有feature
-        // for (let i = 0; i < data.features.length; i++) {
-        // }
-        // const polygon = {
-        //   type: 'polygon',
-        //   rings: data.features[0].geometry.coordinates,
-        // };
-        const polygon = new Polygon({
-            rings: data.features[0].geometry.coordinates[0],
-        });
-        const simpleFillSymbol = {
-            type: 'simple-fill',
-            color: [227, 139, 79, 0.8], // Orange, opacity 80%
-            outline: {
-                color: [255, 255, 255],
-                width: 1,
-            },
-        };
-        const polygonGraphic = new Graphic({
-            geometry: polygon,
-            symbol: simpleFillSymbol,
-        });
-        const graphicsLayer = new GraphicsLayer();
-        map.add(graphicsLayer);
-        graphicsLayer.add(polygonGraphic);
-        view.goTo(polygonGraphic);
-    }
-}
-
 export function insertCity2Map(city) {
     const contained = map.layers.find(layer => layer.title === city);
     if (contained) {
@@ -84,9 +53,12 @@ export function insertCity2Map(city) {
             });
         });
         map.add(graphicsLayer);
+
+        //每次点击清除元素
         const opts = {
             duration: 1500
         };
         view.goTo(graphicsLayer.graphics, opts);
+        
     });
 }

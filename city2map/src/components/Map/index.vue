@@ -2,7 +2,7 @@
   <div id="viewDiv"></div>
   <div id="cityList">
     <ol>
-      <li v-for="city in cities" :key="city" v-on:click="onclick(city)">
+      <li v-for="city in cities" :key="city" @click="onclick(city)">
         {{ city }}
       </li>
     </ol>
@@ -11,9 +11,9 @@
 
 <script>
 /* eslint-disable */
-import { init, createPolygonGeometry, insertCity2Map } from "./utils";
+import { init, insertCity2Map } from "./utils";
 import cityList from "@/config/cities.json";
-import { getCityJson } from "@/api/index.js";
+import { getCityJson, getJsonZj } from "@/api/index.js";
 
 export default {
   name: "Json_map",
@@ -28,8 +28,7 @@ export default {
   methods: {
     onclick(city) {
       // getCityJson(city).then((data) => {
-      //   createPolygonGeometry(data);
-      // });
+      // })
       insertCity2Map(city);
     },
   },
