@@ -4,7 +4,9 @@ import MapView from '@arcgis/core/views/MapView';
 import Graphic from '@arcgis/core/Graphic';
 import GraphicsLayer from '@arcgis/core/layers/GraphicsLayer';
 import Polygon from '@arcgis/core/geometry/Polygon';
-import { getCityJson } from '@/api/index.js';
+import AreaMeasurement2D from "@arcgis/core/widgets/AreaMeasurement2D";
+import ScaleBar from "@arcgis/core/widgets/ScaleBar";
+import { getCityJson } from '@/api/api_cities';
 
 let map;
 let view;
@@ -12,7 +14,7 @@ let view;
 // 初始化地图
 export function init() {
     map = new Map({
-        basemap: 'topo-vector',
+        basemap: "streets-vector",  // The initial basemap to toggle from
     });
 
     view = new MapView({
@@ -21,6 +23,13 @@ export function init() {
         zoom: 4.5,
         map: map,
     });
+    // 添加ScaleBar
+    const scalebar = new ScaleBar({
+        view: view,
+        container: 'scalebar',
+        unit: 'metric'
+    });
+    view.ui.add(scalebar, "bottom-left");
 }
 
 export function insertCity2Map(city) {
@@ -54,11 +63,17 @@ export function insertCity2Map(city) {
         });
         map.add(graphicsLayer);
 
-        //每次点击清除元素
         const opts = {
             duration: 1500
         };
         view.goTo(graphicsLayer.graphics, opts);
-        
     });
 }
+// 计算面积
+export function displayArea() {
+    const measurementWidget = new AreaMeasurement2D({
+        view: view
+    });
+    view.ui.add(measurementWidget, "top-right");
+}
+
