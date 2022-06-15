@@ -7,9 +7,9 @@
       class="searchCity"
       v-model="keyword"
     />
-    <button @click="sortAZ" class="sortBtn">A-Z</button>
+    <button @click="isSorted = !isSorted" class="sortBtn">A-Z</button>
     <ol>
-      <li v-for="city in filterCity" :key="city" @click="onclick(city)">
+      <li v-for="city in sorted" :key="city" @click="onclick(city)">
         {{ city }}
       </li>
     </ol>
@@ -29,20 +29,29 @@ export default {
       cities: cityList,
       sort: false,
       filterCity: [],
+      isSorted: false
     };
   },
   watch: {
     keyword: {
       immediate: true, //当input没有输入的时候就调用handler
       handler(value) {
-        const arr = this.cities.filter((city) => {
-          return city.indexOf(value) !== -1;
-        });
+        const arr = this.cities.filter(city => city.indexOf(value) !== -1);
         this.filterCity = arr;
       },
     },
   },
-  computed: {},
+  computed: {
+    filtered() {
+      return this.cities.filter(city => city.includes(this.keyword));
+    },
+    sorted() {
+      if (this.isSorted) {
+        return this.filtered.sort((p1, p2) => p1.localeCompare(p2));
+      }
+      return this.filtered;
+    }
+  },
   mounted() {
     init();
     displayArea();
@@ -55,7 +64,7 @@ export default {
     sortAZ() {
       if (!this.sort) {
         this.filterCity = this.cities;
-        const resultArr = this.cities.sort(function compareFunction(p1, p2) {
+        const resultArr = this.cities.sort(function(p1, p2) {
           return p1.localeCompare(p2);
         });
         this.filterCity = resultArr;
