@@ -1,11 +1,13 @@
 /* eslint-disable */
 import Map from '@arcgis/core/Map';
 import MapView from '@arcgis/core/views/MapView';
-import Graphic from '@arcgis/core/Graphic';
-import GraphicsLayer from '@arcgis/core/layers/GraphicsLayer';
 import Polygon from '@arcgis/core/geometry/Polygon';
 import AreaMeasurement2D from "@arcgis/core/widgets/AreaMeasurement2D";
 import ScaleBar from "@arcgis/core/widgets/ScaleBar";
+import Measurement from "@arcgis/core/widgets/Measurement";
+import Draw from "@arcgis/core/views/draw/Draw";
+import Graphic from '@arcgis/core/Graphic';
+import GraphicsLayer from '@arcgis/core/layers/GraphicsLayer';
 import { getCityJson } from '@/api/api_cities';
 
 let map;
@@ -18,10 +20,10 @@ export function init() {
     });
 
     view = new MapView({
-        container: 'viewDiv',
-        center: [95, 35],
-        zoom: 4.5,
+        container: "viewDiv",
         map: map,
+        center: [100, 30],
+        zoom: 3,
     });
     // 添加ScaleBar
     const scalebar = new ScaleBar({
@@ -30,7 +32,9 @@ export function init() {
         unit: 'metric'
     });
     view.ui.add(scalebar, "bottom-left");
+    return { map, view };
 }
+
 
 export function insertCity2Map(city) {
     const contained = map.layers.find(layer => layer.title === city);
@@ -69,11 +73,47 @@ export function insertCity2Map(city) {
         view.goTo(graphicsLayer.graphics, opts);
     });
 }
-// 计算面积
-export function displayArea() {
-    const measurementWidget = new AreaMeasurement2D({
-        view: view
+
+//测量小部件
+export function measure() {
+    const measurement = new Measurement();
+    // Set-up event handlers for buttons and click events
+    const distanceButton = document.getElementById("distance");
+    const areaButton = document.getElementById("area");
+    const clearButton = document.getElementById("clear");
+
+    distanceButton.addEventListener("click", function () {
+        distanceMeasurement();
     });
-    view.ui.add(measurementWidget, "top-right");
+    areaButton.addEventListener("click", function () {
+        areaMeasurement();
+    });
+    clearButton.addEventListener("click", function () {
+        clearMeasurements();
+    });
+
+    // Call the appropriate DistanceMeasurement2D
+    function distanceMeasurement() {
+        measurement.activeTool = "distance";
+        distanceButton.classList.add("active");
+        areaButton.classList.remove("active");
+    }
+
+    // Call the appropriate AreaMeasurement2D
+    function areaMeasurement() {
+        measurement.activeTool = "area";
+        distanceButton.classList.remove("active");
+        areaButton.classList.add("active");
+    }
+
+    // Clears all measurements
+    function clearMeasurements() {
+        distanceButton.classList.remove("active");
+        areaButton.classList.remove("active");
+        measurement.clear();
+    }
+    measurement.view = view;
 }
+
+
 

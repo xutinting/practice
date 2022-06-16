@@ -1,5 +1,22 @@
 <template>
   <div id="viewDiv"></div>
+  <div id="toolbarDiv" class="esri-component esri-widget">
+    <button
+      id="distance"
+      class="esri-widget--button esri-interactive esri-icon-measure-line"
+      title="测量距离"
+    ></button>
+    <button
+      id="area"
+      class="esri-widget--button esri-interactive esri-icon-measure-area"
+      title="测量面积"
+    ></button>
+    <button
+      id="clear"
+      class="esri-widget--button esri-interactive esri-icon-trash"
+      title="取消测量"
+    ></button>
+  </div>
   <div id="cityList">
     <input
       type="text"
@@ -18,8 +35,9 @@
 
 <script>
 /* eslint-disable */
-import { init, insertCity2Map, displayArea } from "@/utils/map";
+import { init, insertCity2Map, measure } from "@/utils/map";
 import cityList from "@/config/cities.json";
+import Measurement from "@arcgis/core/widgets/Measurement";
 
 export default {
   name: "Map",
@@ -29,32 +47,33 @@ export default {
       cities: cityList,
       sort: false,
       filterCity: [],
-      isSorted: false
+      isSorted: false,
+      // mapdata: ({ map, view } = init()),
     };
   },
   watch: {
     keyword: {
       immediate: true, //当input没有输入的时候就调用handler
       handler(value) {
-        const arr = this.cities.filter(city => city.indexOf(value) !== -1);
+        const arr = this.cities.filter((city) => city.indexOf(value) !== -1);
         this.filterCity = arr;
       },
     },
   },
   computed: {
     filtered() {
-      return this.cities.filter(city => city.includes(this.keyword));
+      return this.cities.filter((city) => city.includes(this.keyword));
     },
     sorted() {
       if (this.isSorted) {
         return this.filtered.sort((p1, p2) => p1.localeCompare(p2));
       }
       return this.filtered;
-    }
+    },
   },
   mounted() {
     init();
-    displayArea();
+    measure();
   },
   methods: {
     onclick(city) {
@@ -64,7 +83,7 @@ export default {
     sortAZ() {
       if (!this.sort) {
         this.filterCity = this.cities;
-        const resultArr = this.cities.sort(function(p1, p2) {
+        const resultArr = this.cities.sort(function (p1, p2) {
           return p1.localeCompare(p2);
         });
         this.filterCity = resultArr;
@@ -134,5 +153,27 @@ button > .sortBtn {
   width: 38px;
   height: 30px;
   background: #ffffff;
+}
+
+#toolbarDiv {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: default;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.esri-widget--button.active,
+.esri-widget--button.active:hover,
+.esri-widget--button.active:focus {
+  cursor: default;
+  background-color: #999696;
+}
+.esri-widget--button.active path,
+.esri-widget--button.active:hover path,
+.esri-widget--button.active:focus path {
+  fill: #e4e4e4;
 }
 </style>
