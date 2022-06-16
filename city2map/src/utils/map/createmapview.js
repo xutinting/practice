@@ -6,9 +6,12 @@ import AreaMeasurement2D from "@arcgis/core/widgets/AreaMeasurement2D";
 import ScaleBar from "@arcgis/core/widgets/ScaleBar";
 import Measurement from "@arcgis/core/widgets/Measurement";
 import Draw from "@arcgis/core/views/draw/Draw";
+import PictureMarkerSymbol from "@arcgis/core/symbols/PictureMarkerSymbol";
 import Graphic from '@arcgis/core/Graphic';
 import GraphicsLayer from '@arcgis/core/layers/GraphicsLayer';
 import { getCityJson } from '@/api/api_cities';
+
+import capitalArr from '@/config/capital.json';
 
 let map;
 let view;
@@ -32,7 +35,34 @@ export function init() {
         unit: 'metric'
     });
     view.ui.add(scalebar, "bottom-left");
-    return { map, view };
+
+    // 添加省会城市图标
+    console.log(capitalArr, "capitalArr");
+    capitalArr.forEach(capital => {
+        const longitude = capital.value[0];
+        const latitude = capital.value[1];
+        const capitalGraphic = new Graphic({
+            geometry: {
+                type: "point",
+                longitude: longitude,
+                latitude: latitude
+            },
+            // symbol: new PictureMarkerSymbol({
+            //     url:"capital_star.png",
+            //     width:"64px",
+            //     height:"64px"
+            // })
+            symbol: {
+                type: "picture-marker",
+                // url: "~assets/img/capital_star.png",
+                url: require("../../assets/img/capital_star.png"),
+                height: "15px",
+                width: "15px"
+            }
+        });
+        view.graphics.addMany([capitalGraphic]);
+    });
+
 }
 
 
@@ -92,21 +122,21 @@ export function measure() {
         clearMeasurements();
     });
 
-    // Call the appropriate DistanceMeasurement2D
+    // 测量距离
     function distanceMeasurement() {
         measurement.activeTool = "distance";
         distanceButton.classList.add("active");
         areaButton.classList.remove("active");
     }
 
-    // Call the appropriate AreaMeasurement2D
+    // 测量面积
     function areaMeasurement() {
         measurement.activeTool = "area";
         distanceButton.classList.remove("active");
         areaButton.classList.add("active");
     }
 
-    // Clears all measurements
+    // 取消测量
     function clearMeasurements() {
         distanceButton.classList.remove("active");
         areaButton.classList.remove("active");
