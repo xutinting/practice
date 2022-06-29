@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>重复请求问题</title></title>
+</head>
+<body>
+    <button>发送请求</button>
+    <script>
+    const btns = document.querySelectorAll('button');
+    let x = null;
+
+    btns[0].onclick = function () {
+        x = new XMLHttpRequest();
+        x.open("GET","http://localhost:8000/cancle");
+        x.send();
+    }
+
+    </script>
+</body>
+
+</html>
