@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/vue.js"></script>
+    <title>键盘事件</title>
+</head>
+<style>
+    button {
+        height: 20px;
+        width: 100px;
+    }
+</style>
+
+<body>
+    <div id="root">
+        <button @click="clickkk">111</button>
+        <input type="text" placeholder="按下回车提示输入" @keyup = "showInfo">
+    </div>
+    <script>
+        Vue.config.productionTip = false
+        new Vue({
+            el: "#root",
+            data: {},
+            methods: {
+                clickkk(e) {
+                    console.log(e);
+                },
+                showInfo(e) {
+                    if (e.keyCode == 13) {
+                        console.log(e.target.value);
+                    }
+                }
+            },
+        })
+
+
+    </script>
+</body>
+
+</html>

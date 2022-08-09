@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        Vue.config.productionTip = false
+        let person = {
+            name:"xutingting",
+            sex:"female",
+            // age:18
+        }
+
+        Object.defineProperty(person,"age",{        //这种方式添加属性无法被枚举
+            value:18,
+            enumerable:true,     //将属性age设置为可枚举的元素，默认为false
+            writable:true,      //属性可修改，默认为false
+            configurable,       //属性可以删除，默认为false
+        })
+
+        console.log(person);
+    </script>
+</body>
+
+</html>
