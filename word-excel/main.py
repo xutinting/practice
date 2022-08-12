@@ -3,7 +3,6 @@ import xlwt
 from docx import Document
 
 from config import PATHS
-from util import remove
 
 
 word = PATHS['input_path'] + '/' + '2022年照明服务所应急防汛值班表.docx'
